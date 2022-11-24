@@ -1,26 +1,43 @@
 package ru.netology.service;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-import ru.netology.service.CashbackHackService;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class CashbackHackServiceTest {
 
     CashbackHackService service = new CashbackHackService();
 
     @Test
-    public void shouldReturnNull() {
-        int actual = service.remain(1000);
-        int expected = 0;
-        Assert.assertEquals(actual, expected);
-
+    public void shouldCalculateIfAmountCorrect() {
+        int amount = 2600;
+        int actual = service.remain(amount);
+        int expected = 400;
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void shouldReturn100() {
-        int actual = service.remain(900);
-        int expected = 100;
-        Assert.assertEquals(actual, expected);
+    public void shouldCalculateIfAmountZero() {
+        int amount = 0;
+        int actual = service.remain(amount);
+        int expected = 1000;
+        assertEquals(expected, actual);
     }
 
+    @Test
+    public void shouldCalculateIfAmount1000() {
+        int amount = 1000;
+        int actual = service.remain(amount);
+        int expected = 0;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldCalculateIfAmountIncorrect() {
+        int amount = -2000;
+        int actual = service.remain(amount);
+        int expected = 0;
+        assertEquals(expected, actual);
+    }
 
 }
